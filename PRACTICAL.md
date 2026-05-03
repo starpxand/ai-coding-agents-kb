@@ -234,12 +234,15 @@ xdg-open index.html    # Linux
    
 # Готовый Hello, world! ("Hello, world!" меняет цвета по нажатию кнопки)
 Пример 1:
+
 ![Cursor](docs/3.png)
 
 Пример 2:
+
 ![Cursor](docs/4.png)
 
 Пример 3:
+
 ![Cursor](docs/5.png)
 
 ---
