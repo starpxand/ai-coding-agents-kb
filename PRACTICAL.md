@@ -29,20 +29,7 @@
 
 ### Шаг 3: Ориентация в интерфейсе
 
-```
-┌─────────────────────────────────────────────────────┐
-│  CURSOR IDE                                          │
-│                                                     │
-│  ┌──────────┐  ┌───────────────────┐  ┌──────────┐ │
-│  │ Explorer │  │   Редактор кода    │  │ AI Chat  │ │
-│  │ (файлы)  │  │                   │  │ (Cmd+L)  │ │
-│  └──────────┘  └───────────────────┘  └──────────┘ │
-│                                                     │
-│  ┌─────────────────────────────────────────────────┐ │
-│  │  Терминал (Ctrl+`)                              │ │
-│  └─────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────┘
-```
+![Cursor](docs/1.png)
 
 **Основные горячие клавиши:**
 
@@ -87,15 +74,7 @@
 
 Cursor Composer начнёт работу и вы увидите:
 
-```
-● Создание файловой структуры проекта...
-  ○ Создан index.html
-  ○ Создан style.css  
-  ○ Создан script.js
-
-● Применение изменений...
-  ✓ 3 файла создано
-```
+![Cursor](docs/2.png)
 
 Агент создаст все три файла автоматически. Ниже — пример того, что будет сгенерировано.
 
@@ -108,110 +87,134 @@ Cursor Composer начнёт работу и вы увидите:
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World — AI Demo</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="greeting" id="greeting">Hello, World!</h1>
-        <p class="subtitle">Создано с помощью Cursor AI</p>
-        <button class="btn" id="colorBtn">Сменить цвет</button>
-        <div class="counter">
-            Нажатий: <span id="count">0</span>
-        </div>
-    </div>
-    <script src="script.js"></script>
+  <main class="container">
+    <section class="card">
+      <h1 id="helloText">Hello, World!</h1>
+      <p class="subtitle">Нажмите кнопку, чтобы изменить цвет текста</p>
+      <button id="colorButton" type="button">Сменить цвет</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
 ```
 
 #### `style.css`
 ```css
-/* CSS-переменные для темизации */
 :root {
-    --primary: #6366f1;
-    --bg: #0f172a;
-    --text: #f1f5f9;
-    --accent: #818cf8;
+  --bg-start: #0f172a;
+  --bg-end: #1e293b;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Segoe UI', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
 }
 
-.container { text-align: center; padding: 2rem; }
-
-/* Анимация появления */
-.greeting {
-    font-size: clamp(2rem, 8vw, 5rem);
-    color: var(--primary);
-    animation: fadeInDown 0.8s ease;
-    transition: color 0.3s ease;
-    margin-bottom: 1rem;
+.container {
+  /* Центрируем карточку по горизонтали и вертикали с помощью flexbox */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
-.btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+.card {
+  width: min(100%, 520px);
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  animation: fade-up 650ms ease-out;
 }
 
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+h1 {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  margin-bottom: 0.75rem;
+  transition: color 280ms ease;
 }
 
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
+.subtitle {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
 }
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #06202c;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 ```
 
 #### `script.js`
 ```javascript
-// Набор цветов для смены
-const colors = [
-    '#6366f1', // indigo
-    '#ec4899', // pink
-    '#10b981', // emerald
-    '#f59e0b', // amber
-    '#3b82f6', // blue
-];
+// Получаем ссылки на элементы страницы
+const helloText = document.getElementById("helloText");
+const colorButton = document.getElementById("colorButton");
 
-let colorIndex = 0;
-let clickCount = 0;
+// Набор цветов, между которыми будет переключаться текст
+const colors = ["#f8fafc", "#f472b6", "#22d3ee", "#facc15", "#34d399"];
+let currentColorIndex = 0;
 
-const greeting = document.getElementById('greeting');
-const btn = document.getElementById('colorBtn');
-const counter = document.getElementById('count');
-
-// Обработчик нажатия кнопки
-btn.addEventListener('click', () => {
-    colorIndex = (colorIndex + 1) % colors.length;
-    greeting.style.color = colors[colorIndex];
-
-    clickCount++;
-    counter.textContent = clickCount;
-
-    // Небольшая анимация кнопки
-    btn.style.transform = 'scale(0.95)';
-    setTimeout(() => btn.style.transform = '', 100);
+// Меняем цвет текста по кругу при каждом клике
+colorButton.addEventListener("click", () => {
+  currentColorIndex = (currentColorIndex + 1) % colors.length;
+  helloText.style.color = colors[currentColorIndex];
 });
+
 ```
 
 ---
@@ -228,30 +231,16 @@ xdg-open index.html    # Linux
 **Или через Live Server** (расширение совместимо с Cursor как с VS Code):
 1. Правая кнопка на `index.html` → **Open with Live Server**
 2. Браузер откроет `localhost:5500`
+   
+# Готовый Hello, world! ("Hello, world!" меняет цвета по нажатию кнопки)
+Пример 1:
+![Cursor](docs/3.png)
 
----
+Пример 2:
+![Cursor](docs/4.png)
 
-### Этап 5: Дальнейшие итерации с AI
-
-Открываем Chat (`Cmd + L`) и продолжаем диалог:
-
-**Добавить функциональность:**
-```
-Добавь dark/light mode toggle в правом верхнем углу.
-Сохрани выбор пользователя в localStorage.
-```
-
-**Улучшить адаптивность:**
-```
-Кнопка не адаптирована для мобильных устройств.
-Исправь, сделай страницу полностью responsive.
-```
-
-**Объяснить код:**
-```
-Объясни, как работает функция смены цвета в script.js.
-Какие паттерны JavaScript здесь используются?
-```
+Пример 3:
+![Cursor](docs/5.png)
 
 ---
 
